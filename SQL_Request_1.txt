@@ -1,0 +1,11 @@
+SELECT
+    c.login AS courier_login,
+    COUNT(o.id) AS number_of_orders
+FROM
+    "Couriers" c
+JOIN
+    "Orders" o ON c.id = o."courierId"
+WHERE
+    o."inDelivery" = true
+GROUP BY
+    c.login;
