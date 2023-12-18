@@ -1,3 +1,4 @@
+# Евгений Шумаков, 1-я когорта — Финальный проект. Инженер по тестированию плюс
 import data
 import pytest
 from test_framework.utils import *
