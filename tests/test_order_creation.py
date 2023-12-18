@@ -44,13 +44,22 @@ class TestOrderCreation:
         response = create_new_order(body, debug=True)
 
         track_number = response.json()['track']
-        track_information = get_information_by_order_track(track_number)
-        print(track_information["order"])
+        track_information_body = get_information_by_order_track(track_number).json()
+        print(track_information_body["order"])
 
         fields_to_check = {'firstName', 'lastName', 'address', 'comment', 'metroStation', 'phone', 'rentTime',
                            'comment'}
         for field in fields_to_check:
-            assert track_information['order'][field] == body[field], f"{field} сохраняется некорректно"
+            assert track_information_body['order'][field] == body[field], f"{field} сохраняется некорректно"
+
+    def test_get_order_track_by_number_return_code_200(self):
+        body = self.order_list[0]
+        response = create_new_order(body, debug=True)
+
+        track_number = response.json()['track']
+        track_information = get_information_by_order_track(track_number)
+
+        assert track_information.status_code == 200
 
     # Пример кейса, находящий баг в API
     def test_create_order_with_incorrect_phone_number_not_allowed(self):

@@ -14,5 +14,5 @@ def get_information_by_order_track(track_number, debug=False):
     params = {'t': str(track_number)}
     response = requests.get(configuration.URL_SERVICE + configuration.TRACK_PATH, params=params)
     if debug:
-        print(response.json())
-    return response.json()
+        print(response)
+    return response
